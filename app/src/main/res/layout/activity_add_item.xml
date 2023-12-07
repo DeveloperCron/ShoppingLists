@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddItemActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:title="Add Item"
+            app:navigationIcon="@drawable/baseline_arrow_back_24" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:src="@drawable/shoppingilus"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Add a new item to the list!"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColor="#8E8E8E"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/itemInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/baseline_shoppingcart_24"
+                android:hint="Item name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/priceInputLayout"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/baseline_attach_money_24"
+                android:hint="Price">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        app:shapeAppearanceOverlay="?attr/shapeAppearanceLargeComponent"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:id="@+id/addItemBtn"
+        android:textSize="16sp"
+        android:layout_margin="30dp"
+        android:layout_gravity="bottom"
+        android:backgroundTint="#4CAF50"
+        android:text="Add"
+        android:elevation="10dp"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
