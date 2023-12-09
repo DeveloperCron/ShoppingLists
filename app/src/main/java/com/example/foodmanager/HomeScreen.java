@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.divider.MaterialDividerItemDecoration;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -35,7 +32,7 @@ public class HomeScreen extends Fragment {
         super.onCreate(savedInstanceState);
         // Initialize your data here
         items = new ArrayList<>();
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext().getApplicationContext(), items);
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(), items);
     }
 
     @Override
@@ -48,10 +45,10 @@ public class HomeScreen extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
 
-        MaterialDividerItemDecoration divider = new MaterialDividerItemDecoration(getContext(), linearLayoutManager.getOrientation());
-        divider.setDividerInsetStart(30);
-        divider.setDividerInsetEnd(30);
-        recyclerView.addItemDecoration(divider);
+//        MaterialDividerItemDecoration divider = new MaterialDividerItemDecoration(getContext(), linearLayoutManager.getOrientation());
+//        divider.setDividerInsetStart(30);
+//        divider.setDividerInsetEnd(30);
+//        recyclerView.addItemDecoration(divider);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
@@ -81,6 +78,6 @@ public class HomeScreen extends Fragment {
     }
 
     public void updateData(String title, String description, String price) {
-        recyclerViewAdapter.updateDatas(new Item(title, description, price+"$"));
+        recyclerViewAdapter.updateData(new Item(title, description, price+"$"));
     }
 }

@@ -3,12 +3,14 @@ package com.example.foodmanager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -16,8 +18,10 @@ import java.util.Objects;
 
 public class AddItemActivity extends AppCompatActivity {
     MaterialToolbar materialToolbar;
-    TextInputLayout itemInputLayout, descriptionInputLayout, priceInputLayout;
+    TextInputLayout itemInputLayout, priceInputLayout;
+    ChipGroup chipGroup;
     Button button;
+    String chosenCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +29,34 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_item);
 
         itemInputLayout = findViewById(R.id.itemInputLayout);
-        descriptionInputLayout = findViewById(R.id.descriptionInputLayout);
         priceInputLayout = findViewById(R.id.priceInputLayout);
-
+        chipGroup = findViewById(R.id.chipGroup);
         button = findViewById(R.id.addItemBtn);
         materialToolbar = findViewById(R.id.topAppBar);
-        materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+
+        chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            for (Integer id : checkedIds) {
+                Chip chip = group.findViewById(id);
+                chosenCategory = chip.getText().toString();
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validateTextInputs()) {
-                    Log.d("TextInputs validated", "Validation");
-                    Intent intent = new Intent();
-                    intent.putExtra("ItemName", itemInputLayout.getEditText().getText().toString());
-                    intent.putExtra("Description", descriptionInputLayout.getEditText().getText().toString());
-                    intent.putExtra("Price", priceInputLayout.getEditText().getText().toString());
+        materialToolbar.setNavigationOnClickListener(v -> {
+            Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
 
-                    setResult(RESULT_OK, intent);
-//                    For Performance we will add it
-                    finish();
-                }
+        button.setOnClickListener(v -> {
+            if (validateTextInputs()) {
+                System.out.println("Bad what the fuck?");
+                Log.d("TextInputs validated", "Validation");
+                Intent intent = new Intent();
+                intent.putExtra("ItemName", itemInputLayout.getEditText().getText().toString());
+                intent.putExtra("Description", chosenCategory);
+                intent.putExtra("Price", priceInputLayout.getEditText().getText().toString());
+
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -61,6 +66,18 @@ public class AddItemActivity extends AppCompatActivity {
 
         areValid = validateInput((TextInputEditText) priceInputLayout.getEditText(), priceInputLayout, "Invalid price");
         areValid = validateInput((TextInputEditText) itemInputLayout.getEditText(), itemInputLayout, "Invalid item name") && areValid;
+
+        // The chosenCategory first time is null!
+        if (chosenCategory == null) {
+            areValid = false;
+            new MaterialAlertDialogBuilder(AddItemActivity.this)
+                    .setTitle("Empty category")
+                    .setMessage("Please choose the item category")
+                    .setPositiveButton("Accept", (dialog, which) -> {
+
+                    })
+                    .show();
+        }
 
         return areValid;
     }
@@ -76,5 +93,10 @@ public class AddItemActivity extends AppCompatActivity {
             inputLayout.setErrorEnabled(false);
             return true;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

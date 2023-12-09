@@ -43,8 +43,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Shopping Lists"
+                    style="Typography"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
                     android:textSize="18sp"
                     />
 
@@ -71,6 +71,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
+        tools:listitem="@layout/item_view"
+        tools:itemCount="10"
         android:layout_gravity="center_vertical"
         android:layout_height="500dp" />
 

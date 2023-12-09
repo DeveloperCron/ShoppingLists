@@ -7,16 +7,19 @@
     android:orientation="vertical"
     tools:context=".AddItemActivity">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
+            style="Widget.Material3.CollapsingToolbar"
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:subtitleTextColor="@color/black"
             app:title="Add Item"
             app:navigationIcon="@drawable/baseline_arrow_back_24" />
 
@@ -24,79 +27,145 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="230dp"
-            android:src="@drawable/shoppingilus"
-            />
+            android:src="@drawable/shoppingilus" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Add a new item to the list!"
-            android:textStyle="bold"
-            android:textSize="16dp"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textColor="#8E8E8E"
-            />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Add an item to your shopping list"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/itemInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/baseline_shoppingcart_24"
-                android:hint="Item name">
+                android:hint="Item name"
+                app:startIconDrawable="@drawable/baseline_shoppingcart_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/descriptionInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    />
-
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/priceInputLayout"
-                android:layout_width="150dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/baseline_attach_money_24"
-                android:hint="Price">
+                android:hint="Price"
+                app:startIconDrawable="@drawable/baseline_attach_money_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+
+                >
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:src="@drawable/category_24px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_vertical"
+                    android:text="Choose item category"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:singleLine="true"
+                    app:singleSelection="true"
+                    tools:ignore="ScrollViewSize">
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Assist"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cloths"
+                        app:chipIcon="@drawable/apparel_24px"
+                        app:chipIconTint="#4F4F4F" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Assist"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food"
+                        app:chipIcon="@drawable/restaurant_24px"
+                        app:chipIconTint="#4F4F4F" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Assist"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Drinks"
+                        app:chipIcon="@drawable/local_bar_24px"
+                        app:chipIconTint="#4F4F4F" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Assist"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Electronic"
+                        app:chipIcon="@drawable/cable_24px"
+                        app:chipIconTint="#4F4F4F" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Material3.Chip.Assist"
+                        android:checkable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plumbing"
+                        app:chipIcon="@drawable/shower_24px"
+                        app:chipIconTint="#4F4F4F" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
         </LinearLayout>
     </LinearLayout>
 
@@ -114,5 +183,6 @@
         android:text="Add"
         android:elevation="10dp"
         />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

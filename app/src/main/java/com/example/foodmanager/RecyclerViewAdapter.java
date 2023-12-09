@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    Context context;
-    List<Item> items;
+    private final Context context;
+    private final List<Item> items;
 
     public RecyclerViewAdapter(Context context, List<Item> items) {
         this.context = context;
@@ -22,7 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.item_view,parent,false));
+        return new RecyclerViewHolder(LayoutInflater.from(context).inflate(R.layout.item_view, parent, false));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateDatas(Item item){
+    public void updateData(Item item){
         items.add(item);
 
         notifyDataSetChanged();
