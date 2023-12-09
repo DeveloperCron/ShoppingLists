@@ -19,7 +19,7 @@ Regrettably, support for this project is currently unavailable. Users are encour
 This project is built on [Material UI 3](https://m3.material.io) by Google, ensuring a sleek and consistent design.
 
 ## License
-ShoppingLists is licensed under the MIT license, granting users the freedom to use, modify, and distribute the software. See the [LICENSE](/LICENSE.txt) file for more details.
+ShoppingLists is licensed under the MIT license, granting users the freedom to use, modify, and distribute the software. See the [LICENSE](LICENSE) file for more details.
 
 ## Future Developments
 While the app is not planned for future maintenance by the original developer, the open-source nature of the project allows the community to contribute, enhance, and adapt it according to evolving needs. Interested developers are encouraged to fork the project and take it forward.
