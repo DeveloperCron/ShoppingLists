@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
+    private final List<ItemModel> items;
     private final Context context;
-    private final List<Item> items;
 
-    public RecyclerViewAdapter(Context context, List<Item> items) {
+    public RecyclerViewAdapter(Context context, List<ItemModel> items) {
         this.context = context;
         this.items = items;
     }
@@ -33,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateData(Item item){
+    public void updateData(ItemModel item) {
         items.add(item);
 
         notifyDataSetChanged();
@@ -48,4 +48,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public int getItemCount() {
         return items.size();
     }
+
+
 }

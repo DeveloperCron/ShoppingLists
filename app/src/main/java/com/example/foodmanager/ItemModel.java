@@ -1,14 +1,32 @@
 package com.example.foodmanager;
 
-public class Item {
-    private String title;
-    private String description;
-    private String price;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-    public Item(String title, String description, String price) {
+@Entity
+public class ItemModel {
+    @PrimaryKey(autoGenerate = true)
+    public int uid;
+    @ColumnInfo(name = "title")
+    public String title;
+    @ColumnInfo(name = "description")
+    public String description;
+    @ColumnInfo(name = "price")
+    public String price;
+
+    public ItemModel(String title, String description, String price) {
         this.title = title;
         this.description = description;
         this.price = price;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {

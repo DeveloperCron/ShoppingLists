@@ -13,7 +13,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 public class MainActivity extends AppCompatActivity {
     HomeScreen homeScreen;
-
     ExtendedFloatingActionButton extendedFloatingActionButton;
 
     // Googles recommended way to handle result listening

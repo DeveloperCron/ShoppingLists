@@ -1,5 +1,6 @@
 package com.example.foodmanager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,27 +12,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeScreen extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    private List<Item> items;
+    private List<ItemModel> items;
+    private AppDatabase appDatabase;
 
     public HomeScreen() {
         super(R.layout.fragment_home_screen);
         // Required empty public constructor
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Initialize your data here
-        items = new ArrayList<>();
+
+        appDatabase = Room.databaseBuilder(getContext(), AppDatabase.class, "production")
+                .allowMainThreadQueries()
+                .build();
+
+        items = appDatabase.itemModelDao().getAll();
         recyclerViewAdapter = new RecyclerViewAdapter(getContext(), items);
     }
 
@@ -45,11 +52,6 @@ public class HomeScreen extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
 
-//        MaterialDividerItemDecoration divider = new MaterialDividerItemDecoration(getContext(), linearLayoutManager.getOrientation());
-//        divider.setDividerInsetStart(30);
-//        divider.setDividerInsetEnd(30);
-//        recyclerView.addItemDecoration(divider);
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -59,10 +61,10 @@ public class HomeScreen extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                recyclerViewAdapter.removeItem(position);
-                recyclerViewAdapter.notifyItemRemoved(position);
+                ItemModel item = items.get(position);
 
-
+                // Delete item from database
+                appDatabase.itemModelDao().delete(item);
                 Snackbar.make(recyclerView.getRootView(), "Removed item from list", Snackbar.LENGTH_SHORT)
                         .show();
             }
@@ -78,6 +80,12 @@ public class HomeScreen extends Fragment {
     }
 
     public void updateData(String title, String description, String price) {
-        recyclerViewAdapter.updateData(new Item(title, description, price+"$"));
+        appDatabase.itemModelDao().insertAll(new ItemModel(title, description, price + "$"));
+        // @TODO remove this line in the future
+        recyclerViewAdapter.updateData(new ItemModel(title, description, price + "$"));
+    }
+
+    public List<ItemModel> getItems() {
+        return items;
     }
 }
