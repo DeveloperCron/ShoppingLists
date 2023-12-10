@@ -30,7 +30,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/shoppingcart"
+                android:src="@drawable/shopping_cart_ic"
                 />
 
             <LinearLayout
